@@ -1,0 +1,36 @@
+/* .tyle={"background-image: url(images/bg_1.jpg);"} */
+.homeImage1{
+    background-image: url(../../assets/images/bg_1.jpg);
+}
+.homeImage2{
+    background-image: url(../../assets/images/bg_2.jpg);
+}
+
+.font4{
+    font-size: 4vw !important;
+}
+.category{
+    background-image: url(../../assets/images/category.jpg);
+    cursor: pointer;
+}
+.category1{
+    background-image: url(../../assets/images/category-1.jpg);
+    cursor: pointer;
+}
+.category2{
+    background-image: url(../../assets/images/category-2.jpg);
+    cursor: pointer;
+
+}
+.category3{
+    background-image: url(../../assets/images/category-3.jpg);
+    cursor: pointer;
+
+}
+.category4{
+    background-image: url(../../assets/images/category-4.jpg);
+    cursor: pointer;
+}
+.category-wrap{
+    cursor: pointer;
+}
