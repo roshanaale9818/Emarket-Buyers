@@ -1,7 +1,7 @@
 
 import React from 'react';
 const imageSource = './static/images';
-const HomeProduct = (props) => {
+const HomeProductWrap = (props) => {
     return <React.Fragment>
         <section className="ftco-section">
             <div className="container">
@@ -248,7 +248,8 @@ const HomeProduct = (props) => {
                 </div>
             </div>
         </section>
+        <hr></hr>
     </React.Fragment>
 }
-export default HomeProduct;
+export default HomeProductWrap;
 

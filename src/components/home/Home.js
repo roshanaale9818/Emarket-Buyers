@@ -1,7 +1,7 @@
 import React,{useEffect} from "react";
 import classes from './Home.module.css';
 import { $ } from 'react-jquery-plugin';
-import HomeProduct  from "./HomeProduct";
+import HomeProductWrap  from "./HomeProductWrap";
 // carousel setting  
 const carousel = function() {
     console.log("CAROUSEL RUNN");
@@ -166,7 +166,7 @@ const Home = props => {
 
 
 
-        <HomeProduct/>
+        <HomeProductWrap/>
     </React.Fragment>
 }
 export default Home;

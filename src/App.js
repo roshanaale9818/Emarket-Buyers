@@ -19,6 +19,7 @@ import './util/css/jquery.timepicker.css';
 import Home from './components/home/Home';
 
 import { useEffect } from 'react';
+import Footer from './components/Footer/Footer';
 function loadScript(url, callback) {
 
   let script = document.createElement("script")
@@ -44,22 +45,24 @@ function loadScript(url, callback) {
 }
 
 function App() {
+  // "./util/js/jquery.min.js",
+  // "./util/js/jquery-migrate-3.0.1.min.js",
+  // "./util/js/popper.min.js",
+  // "./util/js/bootstrap.min.js",
+  // "./util/js/jquery.easing.1.3.js",
+  // "./util/js/jquery.waypoints.min.js",
+  // "./util/js/jquery.stellar.min.js",
+  // "./util/js/owl.carousel.min.js",
+  // "./util/js/jquery.magnific-popup.min.js",
+  // "./util/js/aos.js",
+  // "./util/js/jquery.animateNumber.min.js",
+  // "./util/js/bootstrap-datepicker.js",
+  // "./util/js/scrollax.min.js",
+  // "./util/js/main.js"
   let jsScripts = [
-    "./util/js/jquery.min.js",
-    "./util/js/jquery-migrate-3.0.1.min.js",
-    "./util/js/popper.min.js",
-    "./util/js/bootstrap.min.js",
-    "./util/js/jquery.easing.1.3.js",
-    "./util/js/jquery.waypoints.min.js",
-    "./util/js/jquery.stellar.min.js",
-    "./util/js/owl.carousel.min.js",
-    "./util/js/jquery.magnific-popup.min.js",
-    "./util/js/aos.js",
-    "./util/js/jquery.animateNumber.min.js",
-    "./util/js/bootstrap-datepicker.js",
-    "./util/js/scrollax.min.js",
-    "./util/js/main.js"
+  
   ]
+  jsScripts=[]
   useEffect(() => {
     jsScripts.map((script)=>{
       // console.log("mapping"); 
@@ -74,6 +77,8 @@ function App() {
 
 
       {/* <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" /><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg></div> */}
+
+      <Footer/>
 
     </div>
   );
