@@ -166,7 +166,14 @@ const Home = props => {
 
 
 
+
+
+
         <HomeProductWrap/>
     </React.Fragment>
 }
 export default Home;
+
+
+
+// fetch API TO get movies  
