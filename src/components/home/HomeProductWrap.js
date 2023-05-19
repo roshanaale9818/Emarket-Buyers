@@ -1,5 +1,6 @@
 
 import React from 'react';
+import {Link} from 'react-router-dom';
 const imageSource = './static/images';
 const HomeProductWrap = (props) => {
     return <React.Fragment>
@@ -17,13 +18,13 @@ const HomeProductWrap = (props) => {
                 <div className="row">
                     <div className="col-md-6 col-lg-3 ftco-animated">
                         <div className="product">
-                            <a href="#" className="img-prod">
+                            <Link to={'/'} className="img-prod">
                                 <img className="img-fluid" src={imageSource+'/product-1.jpg'} alt="product img" />
                                 <span className="status">30%</span>
                                 <div className="overlay"></div>
-                            </a>
+                            </Link>
                             <div className="text py-3 pb-4 px-3 text-center">
-                                <h3><a href="#">Bell Pepper</a></h3>
+                                <h3><Link to={'/'}>Bell Pepper</Link></h3>
                                 <div className="d-flex">
                                     <div className="pricing">
                                         <p className="price"><span className="mr-2 price-dc">$120.00</span><span className="price-sale">$80.00</span></p>
@@ -31,15 +32,15 @@ const HomeProductWrap = (props) => {
                                 </div>
                                 <div className="bottom-area d-flex px-3">
                                     <div className="m-auto d-flex">
-                                        <a href="#" className="add-to-cart d-flex justify-content-center align-items-center text-center">
+                                        <Link to={'/'} className="add-to-cart d-flex justify-content-center align-items-center text-center">
                                             <span><i className="ion-ios-menu"></i></span>
-                                        </a>
-                                        <a href="#" className="buy-now d-flex justify-content-center align-items-center mx-1">
+                                        </Link>
+                                        <Link to={'/'} className="buy-now d-flex justify-content-center align-items-center mx-1">
                                             <span><i className="ion-ios-cart"></i></span>
-                                        </a>
-                                        <a href="#" className="heart d-flex justify-content-center align-items-center ">
+                                        </Link>
+                                        <Link to={'/'} className="heart d-flex justify-content-center align-items-center ">
                                             <span><i className="ion-ios-heart"></i></span>
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
@@ -47,11 +48,11 @@ const HomeProductWrap = (props) => {
                     </div>
                     <div className="col-md-6 col-lg-3 ftco-animated">
                         <div className="product">
-                            <a href="#" className="img-prod"><img className="img-fluid" src={imageSource+"/product-2.jpg"} alt="product img" />
+                            <Link to={'/'} className="img-prod"><img className="img-fluid" src={imageSource+"/product-2.jpg"} alt="product img" />
                                 <div className="overlay"></div>
-                            </a>
+                            </Link>
                             <div className="text py-3 pb-4 px-3 text-center">
-                                <h3><a href="#">Strawberry</a></h3>
+                                <h3><Link to={'/'}>Strawberry</Link></h3>
                                 <div className="d-flex">
                                     <div className="pricing">
                                         <p className="price"><span>$120.00</span></p>
@@ -59,15 +60,15 @@ const HomeProductWrap = (props) => {
                                 </div>
                                 <div className="bottom-area d-flex px-3">
                                     <div className="m-auto d-flex">
-                                        <a href="#" className="add-to-cart d-flex justify-content-center align-items-center text-center">
+                                        <Link to={'/'} className="add-to-cart d-flex justify-content-center align-items-center text-center">
                                             <span><i className="ion-ios-menu"></i></span>
-                                        </a>
-                                        <a href="#" className="buy-now d-flex justify-content-center align-items-center mx-1">
+                                        </Link>
+                                        <Link to={'/'} className="buy-now d-flex justify-content-center align-items-center mx-1">
                                             <span><i className="ion-ios-cart"></i></span>
-                                        </a>
-                                        <a href="#" className="heart d-flex justify-content-center align-items-center ">
+                                        </Link>
+                                        <Link to={'/'} className="heart d-flex justify-content-center align-items-center ">
                                             <span><i className="ion-ios-heart"></i></span>
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
@@ -75,11 +76,11 @@ const HomeProductWrap = (props) => {
                     </div>
                     <div className="col-md-6 col-lg-3 ftco-animated">
                         <div className="product">
-                            <a href="#" className="img-prod"><img className="img-fluid" src={imageSource+"/product-3.jpg"} alt="product img" />
+                            <Link to={'/'} className="img-prod"><img className="img-fluid" src={imageSource+"/product-3.jpg"} alt="product img" />
                                 <div className="overlay"></div>
-                            </a>
+                            </Link>
                             <div className="text py-3 pb-4 px-3 text-center">
-                                <h3><a href="#">Green Beans</a></h3>
+                                <h3><Link to={'/'}>Green Beans</Link></h3>
                                 <div className="d-flex">
                                     <div className="pricing">
                                         <p className="price"><span>$120.00</span></p>
@@ -87,15 +88,15 @@ const HomeProductWrap = (props) => {
                                 </div>
                                 <div className="bottom-area d-flex px-3">
                                     <div className="m-auto d-flex">
-                                        <a href="#" className="add-to-cart d-flex justify-content-center align-items-center text-center">
+                                        <Link to={'/'} className="add-to-cart d-flex justify-content-center align-items-center text-center">
                                             <span><i className="ion-ios-menu"></i></span>
-                                        </a>
-                                        <a href="#" className="buy-now d-flex justify-content-center align-items-center mx-1">
+                                        </Link>
+                                        <Link to={'/'} className="buy-now d-flex justify-content-center align-items-center mx-1">
                                             <span><i className="ion-ios-cart"></i></span>
-                                        </a>
-                                        <a href="#" className="heart d-flex justify-content-center align-items-center ">
+                                        </Link>
+                                        <Link to={'/'} className="heart d-flex justify-content-center align-items-center ">
                                             <span><i className="ion-ios-heart"></i></span>
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
@@ -103,11 +104,11 @@ const HomeProductWrap = (props) => {
                     </div>
                     <div className="col-md-6 col-lg-3 ftco-animated">
                         <div className="product">
-                            <a href="#" className="img-prod"><img className="img-fluid" src={imageSource+"/product-4.jpg"} alt="product img" />
+                            <Link to={'/'} className="img-prod"><img className="img-fluid" src={imageSource+"/product-4.jpg"} alt="product img" />
                                 <div className="overlay"></div>
-                            </a>
+                            </Link>
                             <div className="text py-3 pb-4 px-3 text-center">
-                                <h3><a href="#">Purple Cabbage</a></h3>
+                                <h3><Link to={'/'}>Purple Cabbage</Link></h3>
                                 <div className="d-flex">
                                     <div className="pricing">
                                         <p className="price"><span>$120.00</span></p>
@@ -115,15 +116,15 @@ const HomeProductWrap = (props) => {
                                 </div>
                                 <div className="bottom-area d-flex px-3">
                                     <div className="m-auto d-flex">
-                                        <a href="#" className="add-to-cart d-flex justify-content-center align-items-center text-center">
+                                        <Link to={'/'} className="add-to-cart d-flex justify-content-center align-items-center text-center">
                                             <span><i className="ion-ios-menu"></i></span>
-                                        </a>
-                                        <a href="#" className="buy-now d-flex justify-content-center align-items-center mx-1">
+                                        </Link>
+                                        <Link to={'/'} className="buy-now d-flex justify-content-center align-items-center mx-1">
                                             <span><i className="ion-ios-cart"></i></span>
-                                        </a>
-                                        <a href="#" className="heart d-flex justify-content-center align-items-center ">
+                                        </Link>
+                                        <Link to={'/'} className="heart d-flex justify-content-center align-items-center ">
                                             <span><i className="ion-ios-heart"></i></span>
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
@@ -133,12 +134,12 @@ const HomeProductWrap = (props) => {
 
                     <div className="col-md-6 col-lg-3 ftco-animated">
                         <div className="product">
-                            <a href="#" className="img-prod"><img className="img-fluid" src={imageSource+"/product-5.jpg"} alt="product img" />
+                            <Link to={'/'} className="img-prod"><img className="img-fluid" src={imageSource+"/product-5.jpg"} alt="product img" />
                                 <span className="status">30%</span>
                                 <div className="overlay"></div>
-                            </a>
+                            </Link>
                             <div className="text py-3 pb-4 px-3 text-center">
-                                <h3><a href="#">Tomatoe</a></h3>
+                                <h3><Link to={'/'}>Tomatoe</Link></h3>
                                 <div className="d-flex">
                                     <div className="pricing">
                                         <p className="price"><span className="mr-2 price-dc">$120.00</span><span className="price-sale">$80.00</span></p>
@@ -146,15 +147,15 @@ const HomeProductWrap = (props) => {
                                 </div>
                                 <div className="bottom-area d-flex px-3">
                                     <div className="m-auto d-flex">
-                                        <a href="#" className="add-to-cart d-flex justify-content-center align-items-center text-center">
+                                        <Link to={'/'} className="add-to-cart d-flex justify-content-center align-items-center text-center">
                                             <span><i className="ion-ios-menu"></i></span>
-                                        </a>
-                                        <a href="#" className="buy-now d-flex justify-content-center align-items-center mx-1">
+                                        </Link>
+                                        <Link to={'/'} className="buy-now d-flex justify-content-center align-items-center mx-1">
                                             <span><i className="ion-ios-cart"></i></span>
-                                        </a>
-                                        <a href="#" className="heart d-flex justify-content-center align-items-center ">
+                                        </Link>
+                                        <Link to={'/'} className="heart d-flex justify-content-center align-items-center ">
                                             <span><i className="ion-ios-heart"></i></span>
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
@@ -162,12 +163,12 @@ const HomeProductWrap = (props) => {
                     </div>
                     <div className="col-md-6 col-lg-3 ftco-animated">
                         <div className="product">
-                            <a href="#" className="img-prod">
+                            <Link to={'/'} className="img-prod">
                                 <img className="img-fluid" src={imageSource+"/product-6.jpg"} alt="product img" />
                                 <div className="overlay"></div>
-                            </a>
+                            </Link>
                             <div className="text py-3 pb-4 px-3 text-center">
-                                <h3><a href="#">Brocolli</a></h3>
+                                <h3><Link to={'/'}>Brocolli</Link></h3>
                                 <div className="d-flex">
                                     <div className="pricing">
                                         <p className="price"><span>$120.00</span></p>
@@ -175,15 +176,15 @@ const HomeProductWrap = (props) => {
                                 </div>
                                 <div className="bottom-area d-flex px-3">
                                     <div className="m-auto d-flex">
-                                        <a href="#" className="add-to-cart d-flex justify-content-center align-items-center text-center">
+                                        <Link to={'/'} className="add-to-cart d-flex justify-content-center align-items-center text-center">
                                             <span><i className="ion-ios-menu"></i></span>
-                                        </a>
-                                        <a href="#" className="buy-now d-flex justify-content-center align-items-center mx-1">
+                                        </Link>
+                                        <Link to={'/'} className="buy-now d-flex justify-content-center align-items-center mx-1">
                                             <span><i className="ion-ios-cart"></i></span>
-                                        </a>
-                                        <a href="#" className="heart d-flex justify-content-center align-items-center ">
+                                        </Link>
+                                        <Link to={'/'} className="heart d-flex justify-content-center align-items-center ">
                                             <span><i className="ion-ios-heart"></i></span>
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
@@ -191,11 +192,11 @@ const HomeProductWrap = (props) => {
                     </div>
                     <div className="col-md-6 col-lg-3 ftco-animated">
                         <div className="product">
-                            <a href="#" className="img-prod"><img className="img-fluid" src={imageSource+"/product-7.jpg"} alt="product img" />
+                            <Link to={'/'} className="img-prod"><img className="img-fluid" src={imageSource+"/product-7.jpg"} alt="product img" />
                                 <div className="overlay"></div>
-                            </a>
+                            </Link>
                             <div className="text py-3 pb-4 px-3 text-center">
-                                <h3><a href="#">Carrots</a></h3>
+                                <h3><Link to={'/'}>Carrots</Link></h3>
                                 <div className="d-flex">
                                     <div className="pricing">
                                         <p className="price"><span>$120.00</span></p>
@@ -203,15 +204,15 @@ const HomeProductWrap = (props) => {
                                 </div>
                                 <div className="bottom-area d-flex px-3">
                                     <div className="m-auto d-flex">
-                                        <a href="#" className="add-to-cart d-flex justify-content-center align-items-center text-center">
+                                        <Link to={'/'} className="add-to-cart d-flex justify-content-center align-items-center text-center">
                                             <span><i className="ion-ios-menu"></i></span>
-                                        </a>
-                                        <a href="#" className="buy-now d-flex justify-content-center align-items-center mx-1">
+                                        </Link>
+                                        <Link to={'/'} className="buy-now d-flex justify-content-center align-items-center mx-1">
                                             <span><i className="ion-ios-cart"></i></span>
-                                        </a>
-                                        <a href="#" className="heart d-flex justify-content-center align-items-center ">
+                                        </Link>
+                                        <Link to={'/'} className="heart d-flex justify-content-center align-items-center ">
                                             <span><i className="ion-ios-heart"></i></span>
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
@@ -219,11 +220,11 @@ const HomeProductWrap = (props) => {
                     </div>
                     <div className="col-md-6 col-lg-3 ftco-animated">
                         <div className="product">
-                            <a href="#" className="img-prod"><img className="img-fluid" src={imageSource+"/product-8.jpg"} alt="product img" />
+                            <Link to={'/'} className="img-prod"><img className="img-fluid" src={imageSource+"/product-8.jpg"} alt="product img" />
                                 <div className="overlay"></div>
-                            </a>
+                            </Link>
                             <div className="text py-3 pb-4 px-3 text-center">
-                                <h3><a href="#">Fruit Juice</a></h3>
+                                <h3><Link to={'/'}>Fruit Juice</Link></h3>
                                 <div className="d-flex">
                                     <div className="pricing">
                                         <p className="price"><span>$120.00</span></p>
@@ -231,15 +232,15 @@ const HomeProductWrap = (props) => {
                                 </div>
                                 <div className="bottom-area d-flex px-3">
                                     <div className="m-auto d-flex">
-                                        <a href="#" className="add-to-cart d-flex justify-content-center align-items-center text-center">
+                                        <Link to={'/'} className="add-to-cart d-flex justify-content-center align-items-center text-center">
                                             <span><i className="ion-ios-menu"></i></span>
-                                        </a>
-                                        <a href="#" className="buy-now d-flex justify-content-center align-items-center mx-1">
+                                        </Link>
+                                        <Link to={'/'} className="buy-now d-flex justify-content-center align-items-center mx-1">
                                             <span><i className="ion-ios-cart"></i></span>
-                                        </a>
-                                        <a href="#" className="heart d-flex justify-content-center align-items-center ">
+                                        </Link>
+                                        <Link to={'/'} className="heart d-flex justify-content-center align-items-center ">
                                             <span><i className="ion-ios-heart"></i></span>
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>

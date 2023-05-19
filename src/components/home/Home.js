@@ -2,6 +2,7 @@ import React,{useEffect} from "react";
 import classes from './Home.module.css';
 import { $ } from 'react-jquery-plugin';
 import HomeProductWrap  from "./HomeProductWrap";
+import {Link} from 'react-router-dom';
 // carousel setting  
 const carousel = function() {
     console.log("CAROUSEL RUNN");
@@ -129,19 +130,19 @@ const Home = props => {
 									<div className="text text-center">
 										<h2>Vegetables</h2>
 										<p>Protect the health of every home</p>
-										<p><a href="#" className="btn btn-primary">Shop now</a></p>
+										<p><Link to={'/'} className="btn btn-primary">Shop now</Link></p>
 									</div>
 								</div>
 							</div>
 							<div className="col-md-6">
 								<div className={`category-wrap  img mb-4 d-flex align-items-end ftco-animated ${classes['category1']}`}>
 									<div className="text px-3 py-1">
-										<h2 className="mb-0"><a href="#">Fruits</a></h2>
+										<h2 className="mb-0"><Link to={'/'}>Fruits</Link></h2>
 									</div>
 								</div>
 								<div className={`category-wrap  img d-flex align-items-end  ftco-animated ${classes['category2']}`}>
 									<div className="text px-3 py-1">
-										<h2 className="mb-0"><a href="#">Vegetables</a></h2>
+										<h2 className="mb-0"><Link to={'/'}>Vegetables</Link></h2>
 									</div>
 								</div>
 							</div>
@@ -151,12 +152,12 @@ const Home = props => {
 					<div className="col-md-4">
 						<div className={`category-wrap  img mb-4 d-flex align-items-end ftco-animated ${classes.category3}`} >
 							<div className="text px-3 py-1">
-								<h2 className="mb-0"><a href="#">Juices</a></h2>
+								<h2 className="mb-0"><Link to={'/'}>Juices</Link></h2>
 							</div>		
 						</div>
 						<div className= {`category-wrap  img d-flex align-items-end ftco-animated ${classes.category4}`}>
 							<div className="text px-3 py-1">
-								<h2 className="mb-0"><a href="#">Dried</a></h2>
+								<h2 className="mb-0"><Link to={'/'}>Dried</Link></h2>
 							</div>
 						</div>
 					</div>
