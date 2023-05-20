@@ -10013,6 +10013,12 @@ textarea.form-control {
     stroke-dashoffset: -136px; } }
 
 
+    .form-control.invalid{
+      border-color: red !important;
+    }
+    .error-text{
+      color: red !important;
+    }
 
 
 

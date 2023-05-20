@@ -33,28 +33,29 @@ const Navbar = props => {
     return <React.Fragment>
         <nav className="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
             <div className="container">
-                <NavLink to={'/'}   className="navbar-brand">E-market</NavLink>
+                <NavLink to={'/home'}   className="navbar-brand">E-market</NavLink>
                 <button className="navbar-toggler" onClick={onToggleHandler} type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="oi oi-menu"></span> Menu
                 </button>
 
                 <div className={`collapse navbar-collapse ${toggle && 'show'}`} id="ftco-nav">
                     <ul className="navbar-nav ml-auto">
-                        <li className="nav-item active"><NavLink to={'/'}   className="nav-link">Home</NavLink></li>
+                        <li className="nav-item active"><NavLink to={'/home'}   className="nav-link">Home</NavLink></li>
                         <li className="nav-item dropdown">
                             <NavLink to={'/'}   className="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</NavLink>
                             <div className="dropdown-menu" aria-labelledby="dropdown04">
                                 <NavLink to={'/shop'}   className={`dropdown-item ${classes.submenu}`}>Shop</NavLink>
-                                <NavLink to={'/wishlist'}   className={`dropdown-item ${classes.submenu}`} >Wishlist</NavLink>
-                                <NavLink to={'/singleproduct'}   className={`dropdown-item ${classes.submenu}`}>Single Product</NavLink>
-                                <NavLink to={'/cart'}   className={`dropdown-item ${classes.submenu}`}>Cart</NavLink>
+                                <NavLink to={'/'}   className={`dropdown-item ${classes.submenu}`} >Search</NavLink>
+                                {/* <NavLink to={'/singleproduct'}   className={`dropdown-item ${classes.submenu}`}>Single Product</NavLink> */}
+                                {/* <NavLink to={'/cart'}   className={`dropdown-item ${classes.submenu}`}>Cart</NavLink> */}
                                 <NavLink to={'/checkout'}   className={`dropdown-item ${classes.submenu}`}>Checkout</NavLink>
                             </div>
                         </li>
-                        <li className="nav-item"><NavLink to={'/'}    className="nav-link">About</NavLink></li>
-                        <li className="nav-item"><NavLink to={'/'}    className="nav-link">Blog</NavLink></li>
-                        <li className="nav-item"><NavLink to={'/'}    className="nav-link">Contact</NavLink></li>
-                        <li className="nav-item"><NavLink to={'/'}  className="nav-link"><span className="icon-shopping_cart"></span>[0]</NavLink></li>
+                        <li className="nav-item"><NavLink to={'/aboutus'}    className="nav-link">About</NavLink></li>
+                        <li className="nav-item"><NavLink to={'/contactus'}    className="nav-link">Contact</NavLink></li>
+                        <li className="nav-item"><NavLink to={'/cart'}  className="nav-link"><span className="icon-shopping_cart"></span>[0]</NavLink></li>
+                        <li className="nav-item"><NavLink to={'/login'}    className="nav-link">Login</NavLink></li>
+
 
                     </ul>
                 </div>

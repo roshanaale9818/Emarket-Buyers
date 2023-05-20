@@ -3,12 +3,13 @@ import classes from './Home.module.css';
 import { $ } from 'react-jquery-plugin';
 import HomeProductWrap  from "./HomeProductWrap";
 import {Link} from 'react-router-dom';
+import Feature from "./Feature";
 // carousel setting  
 const carousel = function() {
     console.log("CAROUSEL RUNN");
     $('.home-slider').owlCarousel({
     loop:true,
-    autoplay: false,
+    autoplay: true,
     margin:0,
     animateOut: 'fadeOut',
     animateIn: 'fadeIn',
@@ -42,7 +43,7 @@ const Home = props => {
                     <div className="container">
                         <div className="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
                             <div className={`col-md-12 fadeInUp ftco-animated ftco-animate text-center`}>
-                                <h1 className={`mb-2 ${classes.font4}`}>We serve Fresh Vegestables &amp; Fruits</h1>
+                                <h1 className={`mb-2 ${classes.font4}`}>We serve Fresh Vegetables &amp; Fruits</h1>
                                 <h2 className="subheading mb-4">We deliver organic vegetables &amp; fruits</h2>
                                 <p><span className={`btn btn-primary`}>View Details</span></p>
                             </div>
@@ -67,56 +68,9 @@ const Home = props => {
 
 
 
-        <section className="ftco-section">
-			<div className="container">
-				<div className="row no-gutters ftco-services">
-          <div className="col-md-3 text-center d-flex align-self-stretch ftco-animated">
-            <div className="media block-6 services mb-md-0 mb-4">
-              <div className="icon bg-color-1 active d-flex justify-content-center align-items-center mb-2">
-            		<span className="flaticon-shipped"></span>
-              </div>
-              <div className="media-body">
-                <h3 className="heading">Free Shipping</h3>
-                <span>On order over $100</span>
-              </div>
-            </div>      
-          </div>
-          <div className="col-md-3 text-center d-flex align-self-stretch ftco-animated">
-            <div className="media block-6 services mb-md-0 mb-4">
-              <div className="icon bg-color-2 d-flex justify-content-center align-items-center mb-2">
-            		<span className="flaticon-diet"></span>
-              </div>
-              <div className="media-body">
-                <h3 className="heading">Always Fresh</h3>
-                <span>Product well package</span>
-              </div>
-            </div>    
-          </div>
-          <div className="col-md-3 text-center d-flex align-self-stretch ftco-animated">
-            <div className="media block-6 services mb-md-0 mb-4">
-              <div className="icon bg-color-3 d-flex justify-content-center align-items-center mb-2">
-            		<span className="flaticon-award"></span>
-              </div>
-              <div className="media-body">
-                <h3 className="heading">Superior Quality</h3>
-                <span>Quality Products</span>
-              </div>
-            </div>      
-          </div>
-          <div className="col-md-3 text-center d-flex align-self-stretch ftco-animated">
-            <div className="media block-6 services mb-md-0 mb-4">
-              <div className="icon bg-color-4 d-flex justify-content-center align-items-center mb-2">
-            		<span className="flaticon-customer-service"></span>
-              </div>
-              <div className="media-body">
-                <h3 className="heading">Support</h3>
-                <span>24/7 Support</span>
-              </div>
-            </div>      
-          </div>
-        </div>
-			</div>
-		</section>
+
+<Feature/>
+        
 
 
 
