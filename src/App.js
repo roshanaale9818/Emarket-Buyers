@@ -18,6 +18,8 @@ import './util/css/bootstrap-datepicker.css';
 import './util/css/jquery.timepicker.css';
 import routes from './router/Routes';
 import {RouterProvider} from 'react-router-dom';
+import LoaderProvider from './store/LoaderProvider';
+import Loader from './components/shared/Loader/Loader';
 
 function App() {
   return (
@@ -26,12 +28,15 @@ function App() {
     //   <Home />
 
 
-    //   {/* <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" /><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg></div> */}
 
     //   <Footer/>
 
     // </div>
+    <LoaderProvider>
+      <Loader/>
      <RouterProvider router={routes}></RouterProvider>
+
+      </LoaderProvider>
   );
 }
 

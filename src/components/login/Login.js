@@ -1,23 +1,36 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import Banner from '../banner/Banner';
 import { Link, useNavigate, useNavigation } from 'react-router-dom';
 import useInput from '../../hooks/use-input';
-import { isEmail, isNotLessThanSix } from '../shared/form-logics/form-logic';
+import { isEmail, isNotEmpty, isNotLessThanSix } from '../shared/form-logics/form-logic';
+import LoaderContext from '../../store/loader-context';
+import axios from 'axios';
+import environment from '../../environment/environment';
 // const isNotEmpty = (value) => value.trim() !== '';
 // const isNotLessThanSix = (value)=> value.trim() !== '' && value.trim().value > 6;
 // const isEmail = (value) => value.includes('@');
-const Login = (props) => {
+
+
+
+const Login = () => {
     const navigate = useNavigate();
+    const loaderCtx = useContext(LoaderContext);
+    const onShowLoaderHandler = ()=>{
+        loaderCtx.show();
+    }
+    const onHideLoaderHandler = ()=>{
+        loaderCtx.hide();
+    }
 
     // email 
     const {
-        value: emailValue,
+        value: usernameValue,
         isValid: emailIsValid,
-        hasError: emailHasError,
-        valueChangeHandler: emailChangeHandler,
-        inputBlurHandler: emailBlurHandler,
-        reset: resetEmail,
-      } = useInput(isEmail);
+        hasError: usernameHasError,
+        valueChangeHandler: usernameChangeHandler,
+        inputBlurHandler: usernameBlurHandler,
+        reset: resetUsername,
+      } = useInput(isNotEmpty);
       
 
     // password 
@@ -39,16 +52,39 @@ const Login = (props) => {
             return;
           }
 
-          console.log("Submitted", emailValue,passwordValue)
-
-          resetEmail();
-          resetPassword();
       
       }
 
     
     const onSubmitHandler = (e)=>{
         e.preventDefault();
+        if(!formIsValid){return}
+        onShowLoaderHandler();
+
+        console.log("Submitted", usernameValue,passwordValue);
+        axios.post(`${environment.apiUrl}auth/signin`,{
+            username:usernameValue,
+            password:passwordValue
+        }).then((response)=>{
+            console.log("response",response);
+            if(response.data['status']==='ok'){
+                // console.log();
+                alert("login success");
+                localStorage.setItem('user',JSON.stringify(response['data'].data))
+                onHideLoaderHandler();
+            }
+            else{
+                alert(response['data'].message);
+                onHideLoaderHandler();
+
+            }
+
+        }).catch((error)=>{
+            alert("Something went wrong");
+            console.error(error);
+        })
+        // resetUsername();
+        // resetPassword();
     }
     const onGotoRegisterHandler  = (e)=>{
         e.preventDefault();
@@ -62,14 +98,14 @@ const Login = (props) => {
                     <div className="col-12 col-md-6 order-md-last d-flex">
                         <form onSubmit={onSubmitHandler} className="bg-white p-5 contact-form">
                             <div className="form-group">
-                                <label htmlFor='email'>Email</label>
-                                <input id="email" type="text" className={`form-control ${emailHasError && 'invalid'}`} value={emailValue} 
-                                onChange={emailChangeHandler} 
-                                onBlur={emailBlurHandler}
-                                placeholder="Your email" />
+                                <label htmlFor='email'>Username</label>
+                                <input id="email" type="text" className={`form-control ${usernameHasError && 'invalid'}`} value={usernameValue} 
+                                onChange={usernameChangeHandler} 
+                                onBlur={usernameBlurHandler}
+                                placeholder="Your username" />
 
-                                {emailHasError && <p className='error-text'>
-                                    Email is required.
+                                {usernameHasError && <p className='error-text'>
+                                    Username is required.
                                     </p>}
                             </div>
                             <div className="form-group">
@@ -79,14 +115,19 @@ const Login = (props) => {
                                 onChange={passwordChangeHandler} 
                                 onBlur={passwordBlurHandler}
                                 placeholder="password" />
-                                
+
+                                {/* {<i className='eye-minus'></i>} */}
+                                {/* <span class="icon-eye-blocked"></span>
+                                <span class="icon-eye-minus"></span>                                 */}
                                 {passwordHasError && <p className='error-text'>
                                     Password is required.
                                     </p>}
                             </div>
 
                             <div className="form-group d-flex justify-content-center">
-                                <input type="submit" value="Login" className="btn btn-primary py-3 px-5" />
+                                <button type="button" value="Login" onClick={onSubmitHandler} className="btn btn-primary py-3 px-5">
+                                    Login
+                                    </button>
                             </div>
                             <div className={`register`}>
                                 <div className={`text-center`}>

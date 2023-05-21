@@ -9,6 +9,8 @@ const Main = (props) => {
             <Navbar />
             <Outlet />
             <Footer />
+
+
         </main>
     </React.Fragment>;
 }
