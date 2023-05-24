@@ -47,13 +47,13 @@ const Navbar = props => {
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item active"><NavLink to={'/home'}   className="nav-link">Home</NavLink></li>
                         <li className="nav-item dropdown">
-                            <NavLink to={'/'}   className="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</NavLink>
+                            <NavLink to={'/product-search'}   className="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Products</NavLink>
                             <div className="dropdown-menu" aria-labelledby="dropdown04">
-                                <NavLink to={'/shop'}   className={`dropdown-item ${classes.submenu}`}>Shop</NavLink>
+                                <NavLink to={'/sellers'}   className={`dropdown-item ${classes.submenu}`}>Sellers</NavLink>
                                 <NavLink to={'/product-search'}   className={`dropdown-item ${classes.submenu}`} >Product Search</NavLink>
                                 {/* <NavLink to={'/singleproduct'}   className={`dropdown-item ${classes.submenu}`}>Single Product</NavLink> */}
                                 {/* <NavLink to={'/cart'}   className={`dropdown-item ${classes.submenu}`}>Cart</NavLink> */}
-                                <NavLink to={'/checkout'}   className={`dropdown-item ${classes.submenu}`}>Checkout</NavLink>
+                                <NavLink to={'/cart'}   className={`dropdown-item ${classes.submenu}`}>Cart</NavLink>
                             </div>
                         </li>
                         <li className="nav-item"><NavLink to={'/aboutus'}    className="nav-link">About</NavLink></li>

@@ -2,7 +2,7 @@ import React,{useEffect} from "react";
 import classes from './Home.module.css';
 import { $ } from 'react-jquery-plugin';
 import HomeProductWrap  from "./HomeProductWrap";
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import Feature from "./Feature";
 // carousel setting  
 const carousel = function() {
@@ -31,6 +31,10 @@ const carousel = function() {
     });
 };
 const Home = props => {
+    const navigate =  useNavigate();
+    const onViewMoreHandler = ()=>{
+       navigate('/product-search');
+    }
     useEffect(()=>{
      
         carousel();
@@ -45,7 +49,7 @@ const Home = props => {
                             <div className={`col-md-12 fadeInUp ftco-animated ftco-animate text-center`}>
                                 <h1 className={`mb-2 ${classes.font4}`}>We serve Fresh Vegetables &amp; Fruits</h1>
                                 <h2 className="subheading mb-4">We deliver organic vegetables &amp; fruits</h2>
-                                <p><span className={`btn btn-primary`}>View Details</span></p>
+                                <p><span onClick={onViewMoreHandler} className={`btn btn-primary`}>View More Products</span></p>
                             </div>
                         </div>
                     </div>
@@ -58,7 +62,7 @@ const Home = props => {
                             <div className="col-sm-12 fadeInUp ftco-animated ftco-animate text-center">
                                 <h1  className={`mb-2 ${classes.font4}`}>100% Fresh &amp; Organic Foods</h1>
                                 <h2 className="subheading mb-4">We deliver organic vegetables &amp; fruits</h2>
-                                <p><span className={`btn btn-primary`}>View Details</span></p>
+                                <p><span onClick={onViewMoreHandler} className={`btn btn-primary`}>View More Products</span></p>
                             </div>
                         </div>
                     </div>
@@ -84,7 +88,7 @@ const Home = props => {
 									<div className="text text-center">
 										<h2>Vegetables</h2>
 										<p>Protect the health of every home</p>
-										<p><Link to={'/'} className="btn btn-primary">Shop now</Link></p>
+										<p><Link to={'/product-search'} className="btn btn-primary">Shop now</Link></p>
 									</div>
 								</div>
 							</div>
