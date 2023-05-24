@@ -17,13 +17,14 @@ import './util/css/ionicons.min.css';
 import './util/css/bootstrap-datepicker.css';
 import './util/css/jquery.timepicker.css';
 import routes from './router/Routes';
-import {RouterProvider} from 'react-router-dom';
+import { RouterProvider } from 'react-router-dom';
 import LoaderProvider from './store/LoaderProvider';
 import Loader from './components/shared/Loader/Loader';
+import AuthProvider from './store/loggedin/AuthProvider';
 
 function App() {
   return (
-// <div className="App">
+    // <div className="App">
     //   <Navbar></Navbar>
     //   <Home />
 
@@ -32,11 +33,13 @@ function App() {
     //   <Footer/>
 
     // </div>
-    <LoaderProvider>
-      <Loader/>
-     <RouterProvider router={routes}></RouterProvider>
-
+    <AuthProvider>
+      <LoaderProvider>
+        <Loader />
+        <RouterProvider router={routes}></RouterProvider>
       </LoaderProvider>
+    </AuthProvider>
+
   );
 }
 

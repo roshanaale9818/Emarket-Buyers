@@ -6,6 +6,7 @@ import { isEmail, isNotEmpty, isNotLessThanSix } from '../shared/form-logics/for
 import LoaderContext from '../../store/loader-context';
 import axios from 'axios';
 import environment from '../../environment/environment';
+import AuthContext from '../../store/loggedin/loggedin-context';
 // const isNotEmpty = (value) => value.trim() !== '';
 // const isNotLessThanSix = (value)=> value.trim() !== '' && value.trim().value > 6;
 // const isEmail = (value) => value.includes('@');
@@ -21,6 +22,9 @@ const Login = () => {
     const onHideLoaderHandler = ()=>{
         loaderCtx.hide();
     }
+
+    const authCtx=useContext(AuthContext);
+    // console.log('authCTX',authCtx)
 
     // email 
     const {
@@ -70,8 +74,11 @@ const Login = () => {
             if(response.data['status']==='ok'){
                 // console.log();
                 alert("login success");
-                localStorage.setItem('user',JSON.stringify(response['data'].data))
+                localStorage.setItem('user',JSON.stringify(response['data'].data));
+                const user = response['data'].data;
+                authCtx.logIn(user);
                 onHideLoaderHandler();
+                navigate('/profile')
             }
             else{
                 alert(response['data'].message);
@@ -82,6 +89,8 @@ const Login = () => {
         }).catch((error)=>{
             alert("Something went wrong");
             console.error(error);
+            onHideLoaderHandler();
+
         })
         // resetUsername();
         // resetPassword();

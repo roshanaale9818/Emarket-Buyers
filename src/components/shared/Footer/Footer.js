@@ -59,7 +59,7 @@ const Footer = (props) => {
                     </div>
                     <div className="col-md">
                         <div className="ftco-footer-widget mb-4">
-                            <h2 className="ftco-heading-2">Have NavLink Questions?</h2>
+                            <h2 className="ftco-heading-2">Have any Questions?</h2>
                             <div className="block-23 mb-3">
                                 <ul>
                                     <li><span className="icon icon-map-marker"></span><span className="text">203 Fake St. Mountain View, Parramatta, Sydney, Australia</span></li>

@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {NavLink} from 'react-router-dom';
 import { $ } from 'react-jquery-plugin';
 import classes from './Navbar.module.css';
+import AuthContext from "../../../store/loggedin/loggedin-context";
 
 
 
@@ -12,6 +13,10 @@ const Navbar = props => {
     const onToggleHandler = () => {
         setToggle(!toggle);
     }
+
+
+    const authCtx=useContext(AuthContext);
+    // console.log(authCtx)
 
 
     useEffect(() => {
@@ -45,7 +50,7 @@ const Navbar = props => {
                             <NavLink to={'/'}   className="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</NavLink>
                             <div className="dropdown-menu" aria-labelledby="dropdown04">
                                 <NavLink to={'/shop'}   className={`dropdown-item ${classes.submenu}`}>Shop</NavLink>
-                                <NavLink to={'/'}   className={`dropdown-item ${classes.submenu}`} >Search</NavLink>
+                                <NavLink to={'/product-search'}   className={`dropdown-item ${classes.submenu}`} >Product Search</NavLink>
                                 {/* <NavLink to={'/singleproduct'}   className={`dropdown-item ${classes.submenu}`}>Single Product</NavLink> */}
                                 {/* <NavLink to={'/cart'}   className={`dropdown-item ${classes.submenu}`}>Cart</NavLink> */}
                                 <NavLink to={'/checkout'}   className={`dropdown-item ${classes.submenu}`}>Checkout</NavLink>
@@ -54,9 +59,8 @@ const Navbar = props => {
                         <li className="nav-item"><NavLink to={'/aboutus'}    className="nav-link">About</NavLink></li>
                         <li className="nav-item"><NavLink to={'/contactus'}    className="nav-link">Contact</NavLink></li>
                         <li className="nav-item"><NavLink to={'/cart'}  className="nav-link"><span className="icon-shopping_cart"></span>[0]</NavLink></li>
-                        <li className="nav-item"><NavLink to={'/login'}    className="nav-link">Login</NavLink></li>
-
-
+                       {!authCtx.user && <li className="nav-item"><NavLink to={'/login'}    className="nav-link">Login</NavLink></li> }
+                       {authCtx.user && <li className="nav-item"><NavLink to={'/profile'}    className="nav-link">Profile</NavLink></li> }
                     </ul>
                 </div>
             </div>

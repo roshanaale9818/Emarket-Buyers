@@ -1,9 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Banner from '../banner/Banner';
 import useInput from '../../hooks/use-input';
 import { isEmail, isNotEmpty, isNotLessThanSix } from '../shared/form-logics/form-logic';
+import environment from '../../environment/environment';
+import axios from 'axios';
+import LoaderContext from '../../store/loader-context';
+import { useNavigate } from 'react-router-dom';
 // import { Link } from 'react-router-dom';
+
 const Register = (props) => {
+    const navigate = useNavigate();
+
+    const loaderCtx = useContext(LoaderContext);
+    const onShowLoaderHandler = ()=>{
+        loaderCtx.show();
+    }
+    const onHideLoaderHandler = ()=>{
+        loaderCtx.hide();
+    }
     const {
         value: firstNameValue,
         isValid: firstNameIsValid,
@@ -66,12 +80,21 @@ const Register = (props) => {
         inputBlurHandler: confirmPasswordInputBlurHandler,
         reset: resetConfirmPassword,
     } = useInput(isNotLessThanSix);
+    const {
+        value: usernameValue,
+        isValid: usernameIsValid,
+        hasError: usernameHasError,
+        valueChangeHandler: usernameChangeHandler,
+        inputBlurHandler: usernameInputBlurHandler,
+        reset: resetUsername,
+    } = useInput(isNotEmpty);
     let formIsValid = false;
     if(passwordIsValid&& confirmPasswordIsValid && addressIsValid && contactIsValid &&
-        firstNameIsValid && lastNameIsValid && emailIsValid){
+        firstNameIsValid && lastNameIsValid && emailIsValid && usernameIsValid){
             formIsValid = true;
         }
 
+        
 
 
 
@@ -84,6 +107,7 @@ const Register = (props) => {
         resetEmail();
         resetPassword();
         resetConfirmPassword();
+        resetUsername();
     }
 
 
@@ -94,8 +118,45 @@ const Register = (props) => {
         if(!formIsValid){
             return;
         }
+        if(passwordValue !== confirmPasswordValue){
+            alert("Password donot match");
+            return;
+        }
+        onShowLoaderHandler();
 
-        console.log("VALID")
+
+        axios.post(`${environment.apiUrl}auth/signup`,{
+            username:usernameValue,
+            password:passwordValue,
+            email:emailValue,
+            firstName:firstNameValue,
+            lastName:lastNameValue,
+            contact:contactValue,
+            address:addressValue
+        }).then((response)=>{
+            console.log("response",response);
+            if(response.data['status']==='ok'){
+                // console.log();
+                alert("Signup success");
+                // localStorage.setItem('user',JSON.stringify(response['data'].data))
+                onHideLoaderHandler();
+                navigate('/login')
+                
+            }
+            else{
+                alert(response['data'].message);
+                onHideLoaderHandler();
+
+            }
+
+        }).catch((error)=>{
+            alert(error.response.data.message);
+            console.error(error);
+            onHideLoaderHandler();
+
+        })
+
+        // console.log("VALID")
         
 
 
@@ -109,6 +170,18 @@ const Register = (props) => {
                     <div className="col-md-12 order-md-last d-flex">
                         <form action="#" onSubmit={onSubmitHandler} className="bg-white p-5 contact-form">
                             <div className='row'>
+                            <div className="form-group col-md-6">
+                                    <label htmlFor='name'>Username</label>
+                                    <input type="text" id='name'
+                                        value={usernameValue}
+                                        onChange={usernameChangeHandler}
+                                        onBlur={usernameInputBlurHandler}
+                                        className={`form-control ${usernameHasError && 'invalid'}`} placeholder="John12" />
+
+                                    {usernameHasError && <p className='error-text'>
+                                        User Name is required.
+                                    </p>}
+                                </div>
                                 <div className="form-group col-md-6">
                                     <label htmlFor='name'>First Name</label>
                                     <input type="text" id='name'
@@ -171,24 +244,24 @@ const Register = (props) => {
                             <div className='row'>
                                 <div className="form-group col-md-6">
                                     <label htmlFor='password'>Password</label>
-                                    <input type="text" id='password'
+                                    <input type="password" id='password'
                                         value={passwordValue}
                                         onChange={passwordChangeHandler}
                                         onBlur={passwordInputBlurHandler}
                                         className={`form-control ${passwordHasError && 'invalid'}`} placeholder="password" />
                                     {passwordHasError && <p className='error-text'>
-                                        Password is required.
+                                        Password is required and must be greater than 6 words.
                                     </p>}
                                 </div>
                                 <div className="form-group col-md-6">
                                     <label htmlFor='cpassword'>Confirm Password</label>
-                                    <input type="text" id='cpassword'
+                                    <input type="password" id='cpassword'
                                         value={confirmPasswordValue}
                                         onChange={confirmPasswordChangeHandler}
                                         onBlur={confirmPasswordInputBlurHandler}
                                         className={`form-control ${confirmPasswordHasError && 'invalid'}`} placeholder="password" />
                                     {confirmPasswordHasError && <p className='error-text'>
-                                        Confirm Password is required.
+                                        Confirm Password is required and must be greater than 6 characters.
                                     </p>}
                                 </div>
                             </div>
