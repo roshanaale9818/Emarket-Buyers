@@ -71,6 +71,15 @@ const Register = (props) => {
         reset: resetPassword,
     } = useInput(isNotLessThanSix);
 
+       let {
+        value: stateValue,
+        isValid: stateIsValid,
+        hasError: stateHasError,
+        valueChangeHandler: stateChangeHandler,
+        inputBlurHandler: stateBlurHandler,
+        reset: resetState,
+    } = useInput(isNotEmpty);
+
 
     const {
         value: confirmPasswordValue,
@@ -108,6 +117,7 @@ const Register = (props) => {
         resetPassword();
         resetConfirmPassword();
         resetUsername();
+        resetState();
     }
 
 
@@ -132,7 +142,8 @@ const Register = (props) => {
             firstName:firstNameValue,
             lastName:lastNameValue,
             contact:contactValue,
-            address:addressValue
+            address:addressValue,
+            state:stateValue
         }).then((response)=>{
             console.log("response",response);
             if(response.data['status']==='ok'){
@@ -219,6 +230,16 @@ const Register = (props) => {
                                     </p>}
                                 </div>
                                 <div className="form-group col-md-6">
+                                    <label htmlFor='state'>State</label>
+                                    <input type="text" id='state'
+                                        value={stateValue}
+                                        onChange={stateChangeHandler}
+                                        onBlur={stateBlurHandler} className={`form-control ${stateHasError && 'invalid'}`} placeholder="Eg. New South Wales " />
+                                    {contactHasError && <p className='error-text'>
+                                        State should be valid.
+                                    </p>}
+                                </div>
+                                <div className="form-group col-md-6">
                                     <label htmlFor='contact'>Contact</label>
                                     <input type="number" id='contact'
                                         value={contactValue}
@@ -228,6 +249,8 @@ const Register = (props) => {
                                         Contact should be valid.
                                     </p>}
                                 </div>
+
+                            
                             </div>
                             <div className="form-group">
                                 <label htmlFor='email'>Email</label>
