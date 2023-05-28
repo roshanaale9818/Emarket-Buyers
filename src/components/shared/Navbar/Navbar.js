@@ -49,7 +49,7 @@ const Navbar = props => {
                         <li className="nav-item dropdown">
                             <NavLink to={'/product-search'}   className="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Products</NavLink>
                             <div className="dropdown-menu" aria-labelledby="dropdown04">
-                                <NavLink to={'/sellers'}   className={`dropdown-item ${classes.submenu}`}>Sellers</NavLink>
+                                <NavLink to={'/product-list'}   className={`dropdown-item ${classes.submenu}`}>Product List</NavLink>
                                 <NavLink to={'/product-search'}   className={`dropdown-item ${classes.submenu}`} >Product Search</NavLink>
                                 {/* <NavLink to={'/singleproduct'}   className={`dropdown-item ${classes.submenu}`}>Single Product</NavLink> */}
                                 {/* <NavLink to={'/cart'}   className={`dropdown-item ${classes.submenu}`}>Cart</NavLink> */}
@@ -58,7 +58,8 @@ const Navbar = props => {
                         </li>
                         <li className="nav-item"><NavLink to={'/aboutus'}    className="nav-link">About</NavLink></li>
                         <li className="nav-item"><NavLink to={'/contactus'}    className="nav-link">Contact</NavLink></li>
-                        <li className="nav-item"><NavLink to={'/cart'}  className="nav-link"><span className="icon-shopping_cart"></span>[0]</NavLink></li>
+                        {/* [0] */}
+                        <li className="nav-item"><NavLink to={'/cart'}  className="nav-link"><span className="icon-shopping_cart"></span></NavLink></li>
                        {!authCtx.user && <li className="nav-item"><NavLink to={'/login'}    className="nav-link">Login</NavLink></li> }
                        {authCtx.user && <li className="nav-item"><NavLink to={'/profile'}    className="nav-link">Profile</NavLink></li> }
                     </ul>

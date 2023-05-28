@@ -2,6 +2,7 @@ import React, { useContext } from "react"
 import AuthContext from "../../store/loggedin/loggedin-context";
 import './Profile.css';
 import { useNavigate } from "react-router-dom";
+import OrderList from "../orders/OrdersList";
 const Profile = (props) => {
     const navigator = useNavigate();
     const authCtx = useContext(AuthContext);
@@ -32,6 +33,12 @@ const Profile = (props) => {
                 <div>
                     <button type="button" onClick={onLogoutHandler} className="btn btn-danger">Logout</button>
                 </div>
+
+                <OrderList/>
+
+
+
+
 
 
             </section>

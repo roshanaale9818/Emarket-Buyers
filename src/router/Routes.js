@@ -9,6 +9,8 @@ import Register from '../components/register/Register';
 import Profile from '../components/profile/Profile';
 import ProductSearch from '../components/product-search/ProductSearch';
 import Cart from '../components/cart/Cart';
+import ProductList from '../components/products/ProductList';
+import ProductDetail from '../components/products/ProductDetail';
 
 const routes = createBrowserRouter([
     {
@@ -25,7 +27,12 @@ const routes = createBrowserRouter([
         {path:'/signup',element:<Register/>},
         {path:'/profile',element:<Profile/>},
         {path:'/product-search',element:<ProductSearch/>},
-        {path:'/cart',element:<Cart/>}
+        {path:'/cart',element:<Cart/>},
+        {path:'/product-list',element:<ProductList/>},
+        {path:'/product-detail/:productId',element:<ProductDetail/>},
+
+
+
 
         // { path: '/productdetails/:productId', element: <ProductDetail></ProductDetail> },
       ],

@@ -149,13 +149,13 @@ const HomeProductWrap = (props) => {
                     {products.slice(0, 8).map((product) => {
                         return <div key={product.id} className="col-md-6 col-lg-3 ftco-animated">
                             <div className="product">
-                                <Link to={'/'} className="img-prod">
+                                <Link to={`/product-detail/${product.id}`} className="img-prod">
                                     <img className="img-fluid" src={`${imageSource}/${product.image == null ? 'default.jpg' : product.image}`} alt="product img" />
                                     <span className="status">{product.status}%</span>
                                     <div className="overlay"></div>
                                 </Link>
                                 <div className="text py-3 pb-4 px-3 text-center">
-                                    <h3><Link to={'/'}>{product.name}</Link></h3>
+                                    <h3><Link to={`/product-detail/${product.id}`}>{product.name}</Link></h3>
                                     <div className="d-flex">
                                         <div className="pricing">
                                             <p className="price">
@@ -169,9 +169,9 @@ const HomeProductWrap = (props) => {
                                             <Link to={'/'} onClick={() => onAddProductToCart(product)} className="buy-now d-flex justify-content-center align-items-center mx-1">
                                                 <span><i className="ion-ios-cart"></i></span>
                                             </Link>
-                                            <Link to={'/'} className="heart d-flex justify-content-center align-items-center ">
+                                            {/* <Link to={'/'} className="heart d-flex justify-content-center align-items-center ">
                                                 <span><i className="ion-ios-heart"></i></span>
-                                            </Link>
+                                            </Link> */}
                                         </div>
                                     </div>
                                 </div>

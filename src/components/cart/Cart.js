@@ -7,7 +7,7 @@ import environment from '../../environment/environment';
 import AuthContext from '../../store/loggedin/loggedin-context';
 const Cart = () => {
     const [cartItems, setCartItems] = useState([]);
-    const [cartChanged,setCartChanged]=useState([]);
+    const [shippingAddress,setShippingAddress]=useState('');
     const authCtx = useContext(AuthContext);
     const onDeleteItem = (item)=>{
         if (!authCtx.user) {
@@ -43,6 +43,8 @@ const Cart = () => {
             console.error(err)
         })
     }
+
+    const [totalAmt, setTotalAmt]=useState(0);
     const onGetCartItems = (prop) => {
         if (!authCtx.user) {
             alert("Something went wrong.Please login again");
@@ -62,6 +64,15 @@ const Cart = () => {
                 console.log('sa',response.data.data);
                 setCartItems(response.data.data);
                 console.log("Cart Items", cartItems);
+                // setTotalAmt(0);
+                let amt = 0;
+                cartItems.forEach(cart=>{
+                    console.log('cartItem',cart)
+                    //  setTotalAmt(totalAmt +(cart.quantity*cart.price));
+                    amt = amt+(cart.quantity*cart.price);
+                })
+                console.log("AMT.", amt);
+                setTotalAmt(amt);
             }
             else {
                 alert("Something went wrong");
@@ -76,6 +87,79 @@ const Cart = () => {
     useEffect(() => {
         onGetCartItems();
     },[]);
+
+
+    const onChangeHandler=(e)=>{
+        e.preventDefault();
+        setShippingAddress(e.target.value);
+    }
+
+    const onCheckoutHandler = async () => {
+        // console.log("product adding",); 
+        const _confirm = window.confirm("Are you sure you want to Buy the items?");
+        if (!_confirm) { return }
+        // console.log("authctx", authCtx.user) 
+        if (!authCtx.isLoggedIn) {
+            alert("You are not logged in. You need to login before adding to cart");
+            // navigate('/login');
+            return;
+        }
+        if (!authCtx.isLoggedIn) {
+            return;
+        }
+        if (!authCtx.user['accessToken']) {
+            alert('somethig went wrong please login first');
+            // navigate('/login');
+            authCtx.logOut();
+        }
+        if(!cartItems.length){
+            alert("Cart List is empty. Cannot Checkout.");
+            return;
+        }
+
+        let products = cartItems.map((cart)=>{
+            return {
+                orderId:'',
+                productId:cart.id,
+                quantity:cart.quantity,
+                price:cart.price,
+                amount:cart.quantity * cart.price
+
+            }
+        });
+
+
+        // console.log("PRODUCTS",products);
+        // return;
+        
+        let reqBody = {
+            userId: authCtx.user.id,
+            totalPrice: 0, 
+            totalItems: cartItems.length,
+            status: "PENDING", 
+  
+            shippingAddress: shippingAddress? shippingAddress:"", 
+            description: "description",
+            products:products
+        }
+        const response = await axios.post(environment.apiUrl + 'order/addOrderItems', reqBody, {
+            headers: {
+                'x-access-token': authCtx.user.accessToken
+            }
+        });
+        // console.log("adding", response.data);
+        const { data } = response;
+        // console.log("DATA",data);
+        if (data.status === 'error') {
+            alert(data.message);
+        }
+        if(data.status ==='ok'){
+            alert("Thankyou for buying products. Your product is on the way.");
+            onGetCartItems();
+
+
+        }
+    }
 
 
 
@@ -117,11 +201,11 @@ const Cart = () => {
     
                                             <td className="quantity">
                                                 <div className="input-group mb-3">
-                                                    <input type="text" name="quantity" value={item.quantity} onChange={onCountryChangeHandler} className="quantity form-control input-number"  min="1" max="100" />
+                                                    <input type="text" name="quantity" readOnly value={item.quantity} onChange={onCountryChangeHandler} className="quantity form-control input-number"  min="1" max="100" />
                                                 </div>
                                             </td>
     
-                                            <td className="total">{item.price * item.quantity}</td>
+                                            <td className="total">${item.price * item.quantity}</td>
                                         </tr>
                                         })
 
@@ -205,16 +289,16 @@ const Cart = () => {
                             <form action="#" className="info">
                                 <div className="form-group">
                                     <label htmlFor='country'>Address</label>
-                                    <input type="text" id="country" className="form-control text-left px-3" onChange={onCountryChangeHandler} placeholder="" />
+                                    <input type="text" id="country" placeholder='Unit 2 624 George Street, South Windsor, NSW 2756' className="form-control text-left px-3" value={shippingAddress} onChange={onChangeHandler}  />
                                 </div>
-                                <div className="form-group">
+                                {/* <div className="form-group">
                                     <label htmlFor="state">Contact</label>
                                     <input type="text" id='state' className="form-control text-left px-3" onChange={onCountryChangeHandler} placeholder="" />
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="country">Zip/Postal Code</label>
                                     <input type="text" className="form-control text-left px-3" onChange={onCountryChangeHandler} placeholder="" />
-                                </div>
+                                </div> */}
                             </form>
                         </div>
                         {/* <p><Link to={''} className="btn btn-primary py-3 px-4">Estimate</Link></p> */}
@@ -224,7 +308,7 @@ const Cart = () => {
                             <h3>Cart Totals</h3>
                             <p className="d-flex">
                                 <span>Subtotal</span>
-                                <span></span>
+                                <span>{'$'+ totalAmt}</span>
                             </p>
                             <p className="d-flex">
                                 <span>Delivery</span>
@@ -237,10 +321,11 @@ const Cart = () => {
                             <hr />
                             <p className="d-flex total-price">
                                 <span>Total</span>
-                                <span></span>
+                                <span>{'$'+ totalAmt}</span>
+
                             </p>
                         </div>
-                        <p><Link to={'/'} className="btn btn-primary py-3 px-4">Order</Link></p>
+                        <p><Link className="btn btn-primary py-3 px-4" onClick={onCheckoutHandler}>Checkout</Link></p>
                     </div>
                 </div>
             </div>
