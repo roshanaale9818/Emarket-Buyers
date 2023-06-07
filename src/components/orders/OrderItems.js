@@ -7,22 +7,21 @@ import axios from "axios";
 import environment from "../../environment/environment";
 import LoaderContext from "../../store/loader-context";
 import AuthContext from "../../store/loggedin/loggedin-context";
-import { useNavigate } from 'react-router-dom';
-const OrderList = (props) => {
+import { useNavigate, useParams } from 'react-router-dom';
+const OrderProductList = (props) => {
+
+  const params = useParams();
+
     const loaderCtx = useContext(LoaderContext);
     const authCtx = useContext(AuthContext);
     const [orderList, setorderList] = useState([]);
     useEffect(() => {
-        getOrderList();
+        getOrderItems();
     }, []);
     const today = new Date();
 
-    const onViewProduct = (order)=>{
-        navigate(`/order-products/${order.id}`)
-    }
 
-
-    const getOrderList = () => {
+    const getOrderItems = () => {
         if (!authCtx.user) {
             return;
         }
@@ -34,7 +33,7 @@ const OrderList = (props) => {
         // }
         // loaderCtx.show();
         // if()
-        axios.post(environment.apiUrl + `order/getorderitems`, { userId: String(authCtx.user.id) }, {
+        axios.post(environment.apiUrl + `order/getOrderProductItems`, { userId: String(authCtx.user.id),orderId: params.orderId}, {
             headers: {
                 'x-access-token': authCtx.user.accessToken
             }
@@ -101,20 +100,22 @@ const OrderList = (props) => {
         <section className={`ftco-section contact-section bg-light ${classes['z-top']}`}>
             <div className="container">
                 <div className={classes.heading}>
-                    <h2>Your Orders As of {today.toLocaleDateString()}</h2>
+                    <h2>Your Orders Items</h2>
                 </div>
                 <div className="row">
                     <table className={`table ${classes['table-bottom']}`}>
                         <thead className="thead-dark">
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Description</th>
-                                <th scope="col">Shipping Address</th>
-                                <th scope="col">Total Items</th>
-                                <th scope="col">Total Price</th>
-                                <th scope="col">Order on</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Action</th>
+                                <th scope="col">Product Name</th>
+                                {/* <th scope="col">Shipping Address</th> */}
+                                <th scope="col">Price</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Ordered On</th>
+
+                                {/* <th scope="col">Status</th>
+                                <th scope="col">Action</th> */}
 
                                 {/* <th scope="col">Price</th> */}
                             </tr>
@@ -127,18 +128,16 @@ const OrderList = (props) => {
                                 orderList.length > 0 && orderList.map((order, index) => {
                                     return <tr key={order.id}>
                                         <th scope="row">{index + 1}</th>
-                                        <td>{order.description}</td>
-                                        <td>{order.shippingAddress}</td>
-                                        <td>{order.totalItems}</td>
-                                        <td>{order.totalPrice}</td>
+                                        <td>{order.productName}</td>
+                                        <td>{order.price}</td>
+                                        <td>{order.quantity}</td>
+                                        <td>{order.amount}</td>
                                         <td>{order.createdAt.toString().split("T")[0]}</td>
-                                        <td>{order.status}</td>
-                                        <td>
-                                            {/* <button className="btn btn-primary" onClick={()=>{onAddProductToCart(product)}}>Add to Cart</button>
-                                            <button className="ml-3 btn btn-warning" onClick={()=>{onViewProduct(product)}}>View Product</button> */}
-                                            {/* <button className="ml-3 btn btn-warning" onClick={onViewProduct} >View Products</button> */}
-                                            <button className="ml-3 btn btn-warning" onClick={()=>{onViewProduct(order)}}>View Product</button>
-                                        </td>
+                                        {/* <td>{order.status}</td> */}
+                                        {/* <td> */}
+                                     
+                                            {/* <button className="ml-3 btn btn-warning">View Products</button> */}
+                                        {/* </td> */}
                                     </tr>
                                 })
                             }
@@ -153,4 +152,4 @@ const OrderList = (props) => {
         </section>
     </React.Fragment>
 };
-export default OrderList;
+export default OrderProductList;

@@ -18,10 +18,10 @@ const ProductList = (props) => {
     let {
         value: searchValue,
         isValid: searchIsValid,
-        hasError: searchHasError,
-        valueChangeHandler: searchChangeHandler,
-        inputBlurHandler: searchBlurHandler,
-        reset: resetSearch,
+        // hasError: searchHasError,
+        // valueChangeHandler: searchChangeHandler,
+        // inputBlurHandler: searchBlurHandler,
+        // reset: resetSearch,
     } = useInput(isNotEmpty);
     const getProductList = () => {
         // event.preventDefault();
@@ -94,30 +94,30 @@ const ProductList = (props) => {
             alert("Item added to cart successfull.")
         }
     }
-    const onSubmitHandler = (event) => {
-        event.preventDefault();
+    // const onSubmitHandler = (event) => {
+    //     event.preventDefault();
 
-        if (!searchIsValid) {
-            return;
-        }
-        loaderCtx.show();
-        axios.get(environment.sellersUrl + `products?search=${searchValue}&page=1&limit=20`)
-            .then((response) => {
-                if (response.status === 200) {
-                    setTimeout(() => {
-                        setProducts(response.data.data);
-                        // console.log("products", products);
-                        loaderCtx.hide();
-                    }, 2000)
+    //     if (!searchIsValid) {
+    //         return;
+    //     }
+    //     loaderCtx.show();
+    //     axios.get(environment.sellersUrl + `products?search=${searchValue}&page=1&limit=20`)
+    //         .then((response) => {
+    //             if (response.status === 200) {
+    //                 setTimeout(() => {
+    //                     setProducts(response.data.data);
+    //                     // console.log("products", products);
+    //                     loaderCtx.hide();
+    //                 }, 2000)
 
-                }
-            }).catch((error) => {
-                console.error(error);
-                alert("Something went wrong");
-                loaderCtx.hide();
-            })
+    //             }
+    //         }).catch((error) => {
+    //             console.error(error);
+    //             alert("Something went wrong");
+    //             loaderCtx.hide();
+    //         })
 
-    }
+    // }
     // if (!searchHasError) {
     //     searchIsValid = true
     // }

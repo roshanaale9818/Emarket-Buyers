@@ -7,27 +7,28 @@ import environment from '../../environment/environment';
 import AuthContext from '../../store/loggedin/loggedin-context';
 const Cart = () => {
     const [cartItems, setCartItems] = useState([]);
-    const [shippingAddress,setShippingAddress]=useState('');
+    const [shippingAddress, setShippingAddress] = useState('');
+    const [description, setDescription] = useState('');
     const authCtx = useContext(AuthContext);
-    const onDeleteItem = (item)=>{
+    const onDeleteItem = (item) => {
         if (!authCtx.user) {
             alert("Something went wrong.Please login again");
             authCtx.logOut();
         }
-        let _confirm = window.confirm("Are you sure you want to delete"+ item.productName+' from your cart ?')
+        let _confirm = window.confirm("Are you sure you want to delete" + item.productName + ' from your cart ?')
 
-        if(!_confirm){
+        if (!_confirm) {
             return;
         }
         axios.post(environment.apiUrl + 'cart/deletecartitem', {
             userId: String(authCtx.user.id),
-            userCartId:item.id
+            userCartId: item.id
         }, {
             headers: {
                 'x-access-token': authCtx.user.accessToken
             }
         }).then((response) => {
-            console.log("response",response)
+            console.log("response", response)
             if (response.data.status === 'ok') {
                 // console.log('sa',response.data.data);
                 // setCartItems(response.data.data);
@@ -36,7 +37,8 @@ const Cart = () => {
                 onGetCartItems();
             }
             else {
-                alert("Something went wrong");
+                // alert("Something went wrong");
+                console.error("error occured.")
             }
         }).catch((err) => {
             alert("Something went wrong please try again later.")
@@ -44,10 +46,10 @@ const Cart = () => {
         })
     }
 
-    const [totalAmt, setTotalAmt]=useState(0);
+    const [totalAmt, setTotalAmt] = useState(0);
     const onGetCartItems = (prop) => {
         if (!authCtx.user) {
-            alert("Something went wrong.Please login again");
+            // alert("Something went wrong.Please login again");
             authCtx.logOut();
             return;
         }
@@ -59,17 +61,17 @@ const Cart = () => {
                 'x-access-token': authCtx.user.accessToken
             }
         }).then((response) => {
-            console.log("response",response)
+            console.log("response", response)
             if (response.data.status === 'ok') {
-                console.log('sa',response.data.data);
+                console.log('sa', response.data.data);
                 setCartItems(response.data.data);
                 console.log("Cart Items", cartItems);
                 // setTotalAmt(0);
                 let amt = 0;
-                cartItems.forEach(cart=>{
-                    console.log('cartItem',cart)
+                cartItems.forEach(cart => {
+                    console.log('cartItem', cart)
                     //  setTotalAmt(totalAmt +(cart.quantity*cart.price));
-                    amt = amt+(cart.quantity*cart.price);
+                    amt = amt + (cart.quantity * cart.price);
                 })
                 console.log("AMT.", amt);
                 setTotalAmt(amt);
@@ -81,17 +83,21 @@ const Cart = () => {
             alert("Something went wrong please try again later.")
             console.error(err)
         })
-        
+
     }
     // const {isLoggedIn}= authCtx;
     useEffect(() => {
         onGetCartItems();
-    },[]);
+    }, []);
 
 
-    const onChangeHandler=(e)=>{
+    const onChangeHandler = (e) => {
         e.preventDefault();
         setShippingAddress(e.target.value);
+    }
+    const onDescriptionChangeHandler = (e) => {
+        e.preventDefault();
+        setDescription(e.target.value)
     }
 
     const onCheckoutHandler = async () => {
@@ -112,18 +118,19 @@ const Cart = () => {
             // navigate('/login');
             authCtx.logOut();
         }
-        if(!cartItems.length){
+        if (!cartItems.length) {
             alert("Cart List is empty. Cannot Checkout.");
             return;
         }
 
-        let products = cartItems.map((cart)=>{
+        let products = cartItems.map((cart) => {
             return {
-                orderId:'',
-                productId:cart.id,
-                quantity:cart.quantity,
-                price:cart.price,
-                amount:cart.quantity * cart.price
+                orderId: '',
+                productId: cart.id,
+                quantity: cart.quantity,
+                price: cart.price,
+                amount: cart.quantity * cart.price,
+                name: cart.productName
 
             }
         });
@@ -131,16 +138,16 @@ const Cart = () => {
 
         // console.log("PRODUCTS",products);
         // return;
-        
+
         let reqBody = {
             userId: authCtx.user.id,
-            totalPrice: 0, 
+            totalPrice: 0,
             totalItems: cartItems.length,
-            status: "PENDING", 
-  
-            shippingAddress: shippingAddress? shippingAddress:"", 
-            description: "description",
-            products:products
+            status: "PENDING",
+
+            shippingAddress: shippingAddress ? shippingAddress : "",
+            description: description ? description : '',
+            products: products
         }
         const response = await axios.post(environment.apiUrl + 'order/addOrderItems', reqBody, {
             headers: {
@@ -153,7 +160,7 @@ const Cart = () => {
         if (data.status === 'error') {
             alert(data.message);
         }
-        if(data.status ==='ok'){
+        if (data.status === 'ok') {
             alert("Thankyou for buying products. Your product is on the way.");
             onGetCartItems();
 
@@ -168,7 +175,14 @@ const Cart = () => {
         <Banner name="my cart" parentName='home' parentUrl='/home' />
         <section className="ftco-section ftco-cart">
             <div className="container">
+            <div className=' text-center'>
+                        <div className="alert alert-danger" role="alert">
+                           You are not logged in.
+                        </div>
+
+                    </div>
                 <div className="row">
+    
                     <div className="col-md-12 ftco-animated">
                         <div className="cart-list">
                             <table className="table">
@@ -186,33 +200,33 @@ const Cart = () => {
 
                                     {
                                         cartItems.length > 0 &&
-                                        cartItems.map((item)=>{
+                                        cartItems.map((item) => {
                                             return <tr key={item.id} className="text-center">
-                                            <td className="product-remove"><Link onClick={()=>{onDeleteItem(item)}}><span className="ion-ios-close"></span></Link></td>
-    
-                                            <td className="image-prod"><div className={`${classes['product-img']} img`}></div></td>
-    
-                                            <td className="product-name">
-                                                <h3>{item.productName}</h3>
-                                                <p>{item.description}</p>
-                                            </td>
-    
-                                            <td className="price">${item.price}</td>
-    
-                                            <td className="quantity">
-                                                <div className="input-group mb-3">
-                                                    <input type="text" name="quantity" readOnly value={item.quantity} onChange={onCountryChangeHandler} className="quantity form-control input-number"  min="1" max="100" />
-                                                </div>
-                                            </td>
-    
-                                            <td className="total">${item.price * item.quantity}</td>
-                                        </tr>
+                                                <td className="product-remove"><Link onClick={() => { onDeleteItem(item) }}><span className="ion-ios-close"></span></Link></td>
+
+                                                <td className="image-prod"><div className={`${classes['product-img']} img`}></div></td>
+
+                                                <td className="product-name">
+                                                    <h3>{item.productName}</h3>
+                                                    <p>{item.description}</p>
+                                                </td>
+
+                                                <td className="price">${item.price}</td>
+
+                                                <td className="quantity">
+                                                    <div className="input-group mb-3">
+                                                        <input type="text" name="quantity" readOnly value={item.quantity} onChange={onCountryChangeHandler} className="quantity form-control input-number" min="1" max="100" />
+                                                    </div>
+                                                </td>
+
+                                                <td className="total">${item.price * item.quantity}</td>
+                                            </tr>
                                         })
 
                                     }
 
                                     {
-                                        cartItems.length === 0 &&  <tr>
+                                        cartItems.length === 0 && <tr>
                                             <td colSpan={'5'}>No any items added.</td>
                                         </tr>
                                     }
@@ -289,7 +303,7 @@ const Cart = () => {
                             <form action="#" className="info">
                                 <div className="form-group">
                                     <label htmlFor='country'>Address</label>
-                                    <input type="text" id="country" placeholder='Unit 2 624 George Street, South Windsor, NSW 2756' className="form-control text-left px-3" value={shippingAddress} onChange={onChangeHandler}  />
+                                    <input type="text" id="country" placeholder='Unit 2 624 George Street, South Windsor, NSW 2756' className="form-control text-left px-3" value={shippingAddress} onChange={onChangeHandler} />
                                 </div>
                                 {/* <div className="form-group">
                                     <label htmlFor="state">Contact</label>
@@ -301,6 +315,18 @@ const Cart = () => {
                                 </div> */}
                             </form>
                         </div>
+
+
+                        <div className="cart-total mb-3">
+
+                            <form action="#" className="info">
+                                <div className="form-group">
+                                    <label htmlFor='description'>Description</label>
+                                    <input type="text" id="description" placeholder='Unit 2 624 George Street, South Windsor, NSW 2756' className="form-control text-left px-3" value={description} onChange={onDescriptionChangeHandler} />
+                                </div>
+
+                            </form>
+                        </div>
                         {/* <p><Link to={''} className="btn btn-primary py-3 px-4">Estimate</Link></p> */}
                     </div>
                     <div className="col-lg-4 mt-5 cart-wrap ftco-animated">
@@ -308,7 +334,7 @@ const Cart = () => {
                             <h3>Cart Totals</h3>
                             <p className="d-flex">
                                 <span>Subtotal</span>
-                                <span>{'$'+ totalAmt}</span>
+                                <span>{'$' + totalAmt}</span>
                             </p>
                             <p className="d-flex">
                                 <span>Delivery</span>
@@ -321,7 +347,7 @@ const Cart = () => {
                             <hr />
                             <p className="d-flex total-price">
                                 <span>Total</span>
-                                <span>{'$'+ totalAmt}</span>
+                                <span>{'$' + totalAmt}</span>
 
                             </p>
                         </div>

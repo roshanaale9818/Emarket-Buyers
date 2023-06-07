@@ -11,6 +11,7 @@ import ProductSearch from '../components/product-search/ProductSearch';
 import Cart from '../components/cart/Cart';
 import ProductList from '../components/products/ProductList';
 import ProductDetail from '../components/products/ProductDetail';
+import OrderProductList from '../components/orders/OrderItems';
 
 const routes = createBrowserRouter([
     {
@@ -30,6 +31,9 @@ const routes = createBrowserRouter([
         {path:'/cart',element:<Cart/>},
         {path:'/product-list',element:<ProductList/>},
         {path:'/product-detail/:productId',element:<ProductDetail/>},
+        {path:'/order-products/:orderId',element:<OrderProductList/>},
+
+        
 
 
 

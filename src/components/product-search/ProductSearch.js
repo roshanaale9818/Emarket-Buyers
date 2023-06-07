@@ -6,7 +6,9 @@ import axios from "axios";
 import environment from "../../environment/environment";
 import LoaderContext from "../../store/loader-context";
 import AuthContext from "../../store/loggedin/loggedin-context";
+import { useNavigate } from "react-router-dom";
 const ProductSearch = (props) => {
+    const navigate = useNavigate();
     const loaderCtx = useContext(LoaderContext);
     const authCtx = useContext(AuthContext);
     const [products, setProducts] = useState([]);
@@ -20,6 +22,13 @@ const ProductSearch = (props) => {
         reset: resetSearch,
     } = useInput(isNotEmpty);
     const getProductList = (name) => {
+
+    }
+
+
+    const onViewProduct = (product)=>{
+        console.log("on view product",product);
+        navigate(`/product-detail/${product.id}`)
 
     }
 
@@ -172,7 +181,7 @@ const ProductSearch = (props) => {
                                         <td>{product.status}</td>
                                         <td>
                                             <button className="btn btn-primary" onClick={()=>{onAddProductToCart(product)}}>Add to Cart</button>
-                                            <button className="ml-3 btn btn-warning" onClick={()=>{}}>View Product</button>
+                                            <button className="ml-3 btn btn-warning" onClick={()=>{onViewProduct(product)}}>View Product</button>
 
                                         </td>
                                     </tr>
