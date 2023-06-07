@@ -176,9 +176,9 @@ const Cart = () => {
         <section className="ftco-section ftco-cart">
             <div className="container">
             <div className=' text-center'>
-                        <div className="alert alert-danger" role="alert">
+                        { !authCtx.isLoggedIn  &&  <div className="alert alert-danger" role="alert">
                            You are not logged in.
-                        </div>
+                        </div>}
 
                     </div>
                 <div className="row">
